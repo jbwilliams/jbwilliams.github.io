@@ -32,7 +32,7 @@
     "href": "index.html",
     "title": "pywebsite",
     "section": "",
-    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\n\nimport os\n \n# Using system() method to\n# execute shell commands\nos.system('python -V')\n\nPython 3.9.17\n\n\n0"
+    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\n\nimport os\n \n# Using system() method to\n# execute shell commands\nos.system('python -V')\n\nPython 3.11.3\n\n\n0"
   },
   {
     "objectID": "about.html",
@@ -40,19 +40,5 @@
     "title": "About",
     "section": "",
     "text": "About this site"
-  },
-  {
-    "objectID": "DRY.html#section",
-    "href": "DRY.html#section",
-    "title": "DRY",
-    "section": "",
-    "text": "cte_query = '''\nSELECT\n    branch,\n    date,\n    MAX(unit_price) AS highest_price\n  FROM sales\n  GROUP BY branch, date\n'''\ncte_result = pd.read_sql(cte_querycte, con)\n\nquery = '''\nWITH highest AS (\n  SELECT\n    branch,\n    date,\n    MAX(unit_price) AS highest_price\n  FROM sales\n  GROUP BY branch, date\n)\nSELECT\n  sales.*,\n  h.highest_price\nFROM sales\nJOIN highest h\n  ON sales.branch = h.branch\n    AND sales.date = h.date\n'''\npd.read_sql(query, con)"
-  },
-  {
-    "objectID": "DRY.html#making-it-dry",
-    "href": "DRY.html#making-it-dry",
-    "title": "DRY",
-    "section": "",
-    "text": "If we’re happy with cte_query,\nquery = f'''\nWITH highest AS (\n  {cte_query}\n)\nSELECT\n  sales.*,\n  h.highest_price\nFROM sales\nJOIN highest h\n  ON sales.branch = h.branch\n    AND sales.date = h.date\n'''\npd.read_sql(query, con)"
   }
 ]

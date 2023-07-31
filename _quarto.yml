@@ -6,12 +6,18 @@ website:
   title: "Welcome"
   repo-url: https://github.com/jbwilliams/jbwilliams.github.io
   repo-actions: [edit, issue]
-  navbar:
-    left:
+  sidebar:
+    style: "docked"
+    search: true
+    contents:
       - href: index.qmd
         text: Home
-      - DRY.qmd
-      - Decorator.ipynb
+      - section: "Basics"
+        contents:
+          - DRY.qmd
+      - section: "Patterns"
+        contents:
+          - Decorator.ipynb
 
   
 format:
