@@ -1,5 +1,12 @@
 [
   {
+    "objectID": "DRY.html",
+    "href": "DRY.html",
+    "title": "DRY Examples",
+    "section": "",
+    "text": "SQL\nIf we’re using a common table expression, we might first test the query that creates it:\n\ncte_query = '''\nSELECT\n    branch,\n    date,\n    MAX(unit_price) AS highest_price\n  FROM sales\n  GROUP BY branch, date\n'''\ncte_result = pd.read_sql(cte_querycte, con)\n\nAnd if we’re happy with the result, we make the query that uses it:\nquery = '''\nWITH highest AS (\n  SELECT\n    branch,\n    date,\n    MAX(unit_price) AS highest_price\n  FROM sales\n  GROUP BY branch, date\n)\nSELECT\n  sales.*,\n  h.highest_price\nFROM sales\nJOIN highest h\n  ON sales.branch = h.branch\n    AND sales.date = h.date\n'''\npd.read_sql(query, con)\nBut if we want to keep both cte_query and query, we can avoid repetition by referring back to cte_query:\nquery = f'''\nWITH highest AS (\n  {cte_query}\n)\nSELECT\n  sales.*,\n  h.highest_price\nFROM sales\nJOIN highest h\n  ON sales.branch = h.branch\n    AND sales.date = h.date\n'''\npd.read_sql(query, con)"
+  },
+  {
     "objectID": "Decorator.html",
     "href": "Decorator.html",
     "title": "Decorator",
@@ -33,5 +40,19 @@
     "title": "About",
     "section": "",
     "text": "About this site"
+  },
+  {
+    "objectID": "DRY.html#section",
+    "href": "DRY.html#section",
+    "title": "DRY",
+    "section": "",
+    "text": "cte_query = '''\nSELECT\n    branch,\n    date,\n    MAX(unit_price) AS highest_price\n  FROM sales\n  GROUP BY branch, date\n'''\ncte_result = pd.read_sql(cte_querycte, con)\n\nquery = '''\nWITH highest AS (\n  SELECT\n    branch,\n    date,\n    MAX(unit_price) AS highest_price\n  FROM sales\n  GROUP BY branch, date\n)\nSELECT\n  sales.*,\n  h.highest_price\nFROM sales\nJOIN highest h\n  ON sales.branch = h.branch\n    AND sales.date = h.date\n'''\npd.read_sql(query, con)"
+  },
+  {
+    "objectID": "DRY.html#making-it-dry",
+    "href": "DRY.html#making-it-dry",
+    "title": "DRY",
+    "section": "",
+    "text": "If we’re happy with cte_query,\nquery = f'''\nWITH highest AS (\n  {cte_query}\n)\nSELECT\n  sales.*,\n  h.highest_price\nFROM sales\nJOIN highest h\n  ON sales.branch = h.branch\n    AND sales.date = h.date\n'''\npd.read_sql(query, con)"
   }
 ]
