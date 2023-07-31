@@ -1,0 +1,23 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Welcome"
+  repo-url: https://github.com/jbwilliams/jbwilliams.github.io
+  repo-actions: [edit, issue]
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - Decorator.ipynb
+
+  
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+
+editor: visual
+
