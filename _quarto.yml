@@ -1,0 +1,38 @@
+xproject:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Welcome"
+  repo-url: https://github.com/jbwilliams/jbwilliams.github.io
+  repo-branch: master
+  repo-actions: [edit, source, issue]
+  sidebar:
+    style: "docked"
+    search: true
+    contents:
+      - href: index.qmd
+        text: Home
+      - section: "Basics"
+        contents:
+          - DRY.qmd
+      - section: "Patterns"
+        contents:
+          - Decorator.ipynb
+      - section: "Visualization"
+        contents:
+          - viz.qmd
+
+format:
+  html:
+    theme:
+      light: [cosmo, theme.scss] # from https://github.com/sta210-s22/website/blob/main/_quarto.yml
+      dark: [cosmo, theme-dark.scss]
+    code-copy: true
+    code-overflow: wrap
+    toc: true
+    
+
+
+editor: visual
+

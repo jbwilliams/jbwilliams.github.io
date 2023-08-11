@@ -1,0 +1,69 @@
+---
+title: "DRY Examples"
+execute:
+  eval: false
+---
+
+# SQL
+
+If we're using a common table expression, we might first test the query
+that creates it:
+```{python}
+cte_query = '''
+SELECT
+    branch,
+    date,
+    MAX(unit_price) AS highest_price
+  FROM sales
+  GROUP BY branch, date
+'''
+cte_result = pd.read_sql(cte_querycte, con)
+```
+
+And if we're happy with the result, we make the query that uses it:
+``` python
+query = '''
+WITH highest AS (
+  SELECT
+    branch,
+    date,
+    MAX(unit_price) AS highest_price
+  FROM sales
+  GROUP BY branch, date
+)
+SELECT
+  sales.*,
+  h.highest_price
+FROM sales
+JOIN highest h
+  ON sales.branch = h.branch
+    AND sales.date = h.date
+'''
+pd.read_sql(query, con)
+
+```
+
+But if we want to keep both `cte_query` and `query`, we can avoid
+repetition by referring back to `cte_query`:
+
+```python
+query = f'''
+WITH highest AS (
+  {cte_query}
+)
+SELECT
+  sales.*,
+  h.highest_price
+FROM sales
+JOIN highest h
+  ON sales.branch = h.branch
+    AND sales.date = h.date
+'''
+pd.read_sql(query, con)
+
+```
+
+# R
+
+# Python
+
