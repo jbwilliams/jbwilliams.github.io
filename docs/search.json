@@ -1,5 +1,26 @@
 [
   {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site"
+  },
+  {
+    "objectID": "viz.html",
+    "href": "viz.html",
+    "title": "Visualization",
+    "section": "",
+    "text": "Iris data\nHere’s a plot of the iris data.\n\n\n\n\n\n&lt;matplotlib.collections.PathCollection at 0x131547990&gt;\n(a) The iris data\n\n\n\n\n\n\n(b) ?(caption)\n\n\n\nFigure 1: ?(caption)\n\n\nSource: plotly_example.ipynb\nIf you want to see the code that generated this plot, click on the notebook link."
+  },
+  {
+    "objectID": "plotly_example.html",
+    "href": "plotly_example.html",
+    "title": "Iris plot",
+    "section": "",
+    "text": "import plotly.express as px\nimport matplotlib.pyplot as plt\ndf = px.data.iris()\nplt.scatter(df['sepal_width'], df['sepal_length'])\n\n\n&lt;matplotlib.collections.PathCollection at 0x131547990&gt;\n(a) The iris data\n\n\n\n\n\n\n(b)\n\n\n\nFigure 1: ?(caption)"
+  },
+  {
     "objectID": "DRY.html",
     "href": "DRY.html",
     "title": "DRY Examples",
@@ -33,12 +54,5 @@
     "title": "pywebsite",
     "section": "",
     "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\n\nimport os\n \n# Using system() method to\n# execute shell commands\nos.system('python -V')\n\nPython 3.11.3\n\n\n0"
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this site"
   }
 ]

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Welcome - About</title>
+<title>Welcome - Iris plot</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -174,7 +208,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">About</h1>
+<h1 class="title">Iris plot</h1>
 </div>
 
 
@@ -189,7 +223,29 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>About this site</p>
+<div id="fig-iris-plot-mpl" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> px.data.iris()</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>plt.scatter(df[<span class="st">'sepal_width'</span>], df[<span class="st">'sepal_length'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="fig-iris-plot-mpl-1" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<pre><code>&lt;matplotlib.collections.PathCollection at 0x131547990&gt;</code></pre>
+<figcaption class="figure-caption">(a) The iris data</figcaption>
+</figure>
+</div>
+<div class="cell-output cell-output-display">
+<div id="fig-iris-plot-mpl-2" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="plotly_example_files/figure-html/fig-iris-plot-mpl-output-2.png" class="img-fluid figure-img" data-ref-parent="fig-iris-plot-mpl"></p>
+<figcaption class="figure-caption">(b)</figcaption>
+</figure>
+</div>
+</div>
+<figcaption class="figure-caption">Figure&nbsp;1: <strong>?(caption)</strong></figcaption>
+</figure>
+</div>
 
 
 
@@ -546,4 +602,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jbwilliams/jbwilliams.github.io/edit/master/about.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/jbwilliams/jbwilliams.github.io/blob/master/about.qmd" class="toc-action">View source</a></p><p><a href="https://github.com/jbwilliams/jbwilliams.github.io/issues/new" class="toc-action">Report an issue</a></p></div></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.dev/jbwilliams/jbwilliams.github.io/blob/master/plotly_example.ipynb" class="toc-action">Edit this page</a></p><p><a href="https://github.com/jbwilliams/jbwilliams.github.io/blob/master/plotly_example.ipynb" class="toc-action">View source</a></p><p><a href="https://github.com/jbwilliams/jbwilliams.github.io/issues/new" class="toc-action">Report an issue</a></p></div></div></div></div></footer></body></html>
