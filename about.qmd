@@ -1,6 +1,0 @@
----
-title: "About"
-jupyter: qenv
----
-
-About this site

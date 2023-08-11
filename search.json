@@ -7,27 +7,6 @@
     "text": "About this site"
   },
   {
-    "objectID": "viz.html",
-    "href": "viz.html",
-    "title": "Visualization",
-    "section": "",
-    "text": "Iris data\nHere’s a plot of the iris data.\n\n\n\n\n\n&lt;matplotlib.collections.PathCollection at 0x131547990&gt;\n(a) The iris data\n\n\n\n\n\n\n(b) ?(caption)\n\n\n\nFigure 1: ?(caption)\n\n\nSource: plotly_example.ipynb\nIf you want to see the code that generated this plot, click on the notebook link."
-  },
-  {
-    "objectID": "plotly_example.html",
-    "href": "plotly_example.html",
-    "title": "Iris plot",
-    "section": "",
-    "text": "import plotly.express as px\nimport matplotlib.pyplot as plt\ndf = px.data.iris()\nplt.scatter(df['sepal_width'], df['sepal_length'])\n\n\n&lt;matplotlib.collections.PathCollection at 0x131547990&gt;\n(a) The iris data\n\n\n\n\n\n\n(b)\n\n\n\nFigure 1: ?(caption)"
-  },
-  {
-    "objectID": "DRY.html",
-    "href": "DRY.html",
-    "title": "DRY Examples",
-    "section": "",
-    "text": "SQL\nIf we’re using a common table expression, we might first test the query that creates it:\n\ncte_query = '''\nSELECT\n    branch,\n    date,\n    MAX(unit_price) AS highest_price\n  FROM sales\n  GROUP BY branch, date\n'''\ncte_result = pd.read_sql(cte_querycte, con)\n\nAnd if we’re happy with the result, we make the query that uses it:\nquery = '''\nWITH highest AS (\n  SELECT\n    branch,\n    date,\n    MAX(unit_price) AS highest_price\n  FROM sales\n  GROUP BY branch, date\n)\nSELECT\n  sales.*,\n  h.highest_price\nFROM sales\nJOIN highest h\n  ON sales.branch = h.branch\n    AND sales.date = h.date\n'''\npd.read_sql(query, con)\nBut if we want to keep both cte_query and query, we can avoid repetition by referring back to cte_query:\nquery = f'''\nWITH highest AS (\n  {cte_query}\n)\nSELECT\n  sales.*,\n  h.highest_price\nFROM sales\nJOIN highest h\n  ON sales.branch = h.branch\n    AND sales.date = h.date\n'''\npd.read_sql(query, con)"
-  },
-  {
     "objectID": "Decorator.html",
     "href": "Decorator.html",
     "title": "Decorator",
@@ -47,6 +26,13 @@
     "title": "Decorator",
     "section": "An easy-to-change design using Decorator",
     "text": "An easy-to-change design using Decorator\nLet’s see how the Decorator pattern makes our design easier to change.\n\n# Beverage and its subclasses know nothing about condiments:\n\nclass Beverage:       \n    def __str__(self):\n        return \"Unknown Beverage\"\n\n\nclass HouseBlend(Beverage):\n    def get_cost(self):\n        return 0.89\n    \n    def __str__(self):\n        return \"House Blend\"\n        \nclass DarkRoast(Beverage):\n    def get_cost(self):\n        return 0.99\n    \n    def __str__(self):\n        return \"Dark Roast\"\n    \nclass Decaf(Beverage):\n    def get_cost(self):\n        return 1.05\n    \n    def __str__(self):\n        return \"Decaf\"\n    \n############################\n# Here are the decorators\n\nclass CondimentDecorator(Beverage):\n    def __init__(self, beverage):\n        super().__init__()\n        self.beverage = beverage\n        \nclass Milk(CondimentDecorator):\n    def __str__(self):\n        return self.beverage.__str__() + \", add Milk\"\n    \n    def get_cost(self):\n        return self.beverage.get_cost() + 0.10\n\nclass Soy(CondimentDecorator):\n    def __str__(self):\n        return self.beverage.__str__() + \", add Soy\"\n    \n    def get_cost(self):\n        return self.beverage.get_cost() + 0.15\n    \nclass Mocha(CondimentDecorator):\n    def __str__(self):\n        return self.beverage.__str__() + \", add Mocha\"\n    \n    def get_cost(self):\n        return self.beverage.get_cost() + 0.20\n\nThe usage of these classes now looks different. Instead of specifying the condiments in the call to the constructor, we wrap the constructor with the decorators:\n\norder = [Milk(Mocha(Decaf())),\n         Soy(DarkRoast())]\n\nfor bev in order:\n    print(f'{bev}: ${bev.get_cost()}')\n\nDecaf, add Mocha, add Milk: $1.35\nDark Roast, add Soy: $1.14\n\n\n\nThe payoff\nWhen we enhance our system with the new Whip condiment, we don’t need to modify any existing class. We only have to define a new subclass of the decorator.\n\nclass Whip(CondimentDecorator):\n    def __str__(self):\n        return self.beverage.__str__() + \", add Whip\"\n    \n    def get_cost(self):\n        return self.beverage.get_cost() + 0.10\n\nAnd with that one addition, we can add Whip to the menu:\n\norder = [Milk(Mocha(Decaf())),\n         Whip(DarkRoast())]\n\nfor bev in order:\n    print(f'{bev}: ${bev.get_cost()}')\n\nDecaf, add Mocha, add Milk: $1.35\nDark Roast, add Whip: $1.09"
+  },
+  {
+    "objectID": "DRY.html",
+    "href": "DRY.html",
+    "title": "DRY Examples",
+    "section": "",
+    "text": "SQL\nIf we’re using a common table expression, we might first test the query that creates it:\n\ncte_query = '''\nSELECT\n    branch,\n    date,\n    MAX(unit_price) AS highest_price\n  FROM sales\n  GROUP BY branch, date\n'''\ncte_result = pd.read_sql(cte_querycte, con)\n\nAnd if we’re happy with the result, we make the query that uses it:\nquery = '''\nWITH highest AS (\n  SELECT\n    branch,\n    date,\n    MAX(unit_price) AS highest_price\n  FROM sales\n  GROUP BY branch, date\n)\nSELECT\n  sales.*,\n  h.highest_price\nFROM sales\nJOIN highest h\n  ON sales.branch = h.branch\n    AND sales.date = h.date\n'''\npd.read_sql(query, con)\nBut if we want to keep both cte_query and query, we can avoid repetition by referring back to cte_query:\nquery = f'''\nWITH highest AS (\n  {cte_query}\n)\nSELECT\n  sales.*,\n  h.highest_price\nFROM sales\nJOIN highest h\n  ON sales.branch = h.branch\n    AND sales.date = h.date\n'''\npd.read_sql(query, con)\n\n\nR\n\n\nPython"
   },
   {
     "objectID": "index.html",
